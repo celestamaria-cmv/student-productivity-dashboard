@@ -1,0 +1,39 @@
+.study-container{
+  max-width:500px;
+  margin:40px auto;
+  padding:20px;
+  background:#f9f9f9;
+  border-radius:10px;
+  text-align:center;
+}
+
+.study-title{
+  margin-bottom:20px;
+}
+
+.study-hours-box{
+  font-size:20px;
+  margin-bottom:20px;
+}
+
+.study-buttons button{
+  margin:5px;
+  padding:8px 12px;
+  border:none;
+  border-radius:5px;
+  color:white;
+}
+
+
+
+.add-hour{
+  background-color:green;
+}
+
+.remove-hour{
+  background-color:orange;
+}
+
+.reset-hour{
+  background-color:red;
+}
