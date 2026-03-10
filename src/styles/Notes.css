@@ -1,0 +1,52 @@
+.notes-container{
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+.notes-title{
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.notes-input-section{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.notes-input{
+  padding: 8px;
+  width: 250px;
+}
+
+.add-note-btn{
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.notes-list{
+  list-style: none;
+  padding: 0;
+}
+
+.note-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.delete-note-btn{
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
