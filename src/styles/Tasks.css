@@ -95,3 +95,48 @@ input{
   text-decoration: line-through;
   color: red;
 }
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 10px auto;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* 🔹 Sort Buttons */
+.sort-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.sort-buttons button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #444;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.sort-buttons button:hover {
+  background-color: #666;
+}
+
+.filter-buttons,
+.sort-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button:active {
+  transform: scale(0.95);
+}

@@ -20,7 +20,7 @@ function App() {
 
         <Sidebar />
 
-        {/* Pass darkMode to Navbar */}
+      
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
         <Routes>
