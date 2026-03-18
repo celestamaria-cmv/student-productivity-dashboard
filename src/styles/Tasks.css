@@ -14,6 +14,10 @@
   margin-bottom: 20px;
 }
 
+input{
+  width: 100%;
+  max-width: 300px;
+}
 
 .task-input{
   text-align: center;
@@ -23,6 +27,18 @@
   padding: 8px;
   margin-bottom:3px;
  
+}
+
+.task-buttons{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.dashboard-container,
+.tasks-container,
+.notes-container{
+  padding: 10px;
 }
 
 .add-button{

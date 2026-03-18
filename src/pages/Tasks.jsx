@@ -1,19 +1,13 @@
 import { useState, useEffect } from "react";
 import "../styles/Tasks.css";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 function Tasks(){
-
-  const [tasks, setTasks] = useState(() => {
-   const saved = localStorage.getItem("Tasks");
-   return saved ? JSON.parse(saved) : [];
-  });
+  const [tasks, setTasks] = useLocalStorage("Tasks", []);
   const [input, setInput] = useState("");
   const [filter, setFilter] = useState("all");
 
-  useEffect(() => {
-    localStorage.setItem("Tasks", JSON.stringify(tasks));
-  }, [tasks]);
-
+  
   function addTasks(){
     const trimmedTask = input.trim();
 
@@ -28,7 +22,7 @@ function Tasks(){
   }
 
   function editTasks(task, index){
-  const newTask = prompt("Edit your task");
+    const newTask = prompt("Edit your task");
 
   if(newTask){
     const updatedTasks = [...tasks];

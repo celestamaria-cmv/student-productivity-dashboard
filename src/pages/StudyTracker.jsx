@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
 import "../styles/StudyTracker.css"
+import useLocalStorage from "../hooks/useLocalStorage";
 
 function StudyTracker(){
-   const [hours,setHours]=useState(()=>{
-    const saved = localStorage.getItem("studyHours");
-    return saved ? JSON.parse(saved) : 0;
-   });
-
-    useEffect(()=>{
-        localStorage.setItem("studyHours",JSON.stringify(hours));
-    },[{"text":"React","completed":false}]);
+     const [hours, setHours] = useLocalStorage("studyHours", 0);
 
     function addHours(){
         setHours(hours +1);

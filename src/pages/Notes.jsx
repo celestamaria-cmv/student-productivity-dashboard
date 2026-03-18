@@ -1,16 +1,11 @@
 import { useState,useEffect } from "react";
 import "../styles/Notes.css";
+import useLocalStorage from "../hooks/useLocalStorage";
+
 
 function Notes(){
-  const [notes, setNotes] = useState(() => {
-    const saved = localStorage.getItem("notes");
-    return saved ? JSON.parse(saved) : [];
-});
+  const [notes, setNotes] = useLocalStorage("notes", []);
   const[input,setInput]=useState("");
-
-useEffect(() => {
-  localStorage.setItem("notes", JSON.stringify(notes));
-}, [notes]);
 
 function addNote(){
   const trimmedNote=input.trim();
