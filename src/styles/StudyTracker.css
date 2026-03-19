@@ -1,39 +1,62 @@
-.study-container{
-  max-width:500px;
-  margin:40px auto;
-  padding:20px;
-  background:#f9f9f9;
-  border-radius:10px;
-  text-align:center;
+.study-container {
+  width: 100%;
+  max-width: 900px;
+  padding: 30px;
+  background: #f5f6f8;
+  border-radius: 12px;
+  text-align: center;
 }
 
-.study-title{
-  margin-bottom:20px;
+.study-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
 }
 
-.study-hours-box{
-  font-size:20px;
-  margin-bottom:20px;
+.study-hours-box {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  font-size: 18px;
+  color: #555;
 }
 
-.study-buttons button{
-  margin:5px;
-  padding:8px 12px;
-  border:none;
-  border-radius:5px;
-  color:white;
+.study-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
-
-
-.add-hour{
-  background-color:green;
+.study-buttons button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.remove-hour{
-  background-color:orange;
+.add-hour {
+  background-color: #e8f5e9;
+  color: #2e7d32;
 }
 
-.reset-hour{
-  background-color:red;
+.remove-hour {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+.reset-hour {
+  background-color: #fdecea;
+  color: #c62828;
+}
+
+.study-buttons button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.95);
 }

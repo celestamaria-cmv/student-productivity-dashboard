@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/Tasks.css";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -9,6 +9,15 @@ function Tasks(){
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [sortType, setSortType] = useState("default");
+  const [message, setMessage] = useState("");
+  const [toastType, setToastType] = useState("");
+
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => setMessage(""), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
 
   function addTasks(){
     const trimmedTask = input.trim();
@@ -16,11 +25,15 @@ function Tasks(){
     if (trimmedTask !== ""){
       setTasks([...tasks, { text: trimmedTask, completed: false }]);
       setInput("");
+      setMessage("Task added ✅");
+      setToastType("success");
     }
   }
 
   function deleteTasks(taskToDelete){
     setTasks(tasks.filter(t => t !== taskToDelete));
+    setMessage("Task deleted ❌");
+    setToastType("delete");
   }
 
   function editTasks(task, index){
@@ -30,6 +43,8 @@ function Tasks(){
       const updatedTasks = [...tasks];
       updatedTasks[index].text = newTask;
       setTasks(updatedTasks);
+      setMessage("Task updated ✏️");
+      setToastType("update");
     }
   }
 
@@ -37,20 +52,17 @@ function Tasks(){
     const updatedTasks = [...tasks];
     updatedTasks[index].completed = !updatedTasks[index].completed;
     setTasks(updatedTasks);
+    setMessage("Task status changed 🔄");
+    setToastType("update");
   }
 
-  
   const filteredTasks = tasks.filter(task => {
-
     if (filter === "completed" && !task.completed) return false;
     if (filter === "pending" && task.completed) return false;
-
     if (!task.text.toLowerCase().includes(search.toLowerCase())) return false;
-
     return true;
   });
 
-  
   let sortedTasks = [...filteredTasks];
 
   if (sortType === "az") {
@@ -70,6 +82,8 @@ function Tasks(){
 
       <h2 className="tasks-title">Tasks</h2>
 
+      {message && <p className={`toast ${toastType}`}>{message}</p>}
+
       <div className="task-input-section">
         <input
           className="task-input"
@@ -87,7 +101,6 @@ function Tasks(){
         </button>
       </div>
 
-    
       <input
         className="search-input"
         type="text"
@@ -96,14 +109,12 @@ function Tasks(){
         onChange={(e) => setSearch(e.target.value)}
       />
 
-    
       <div className="filter-buttons">
         <button onClick={() => setFilter("all")}>All</button>
         <button onClick={() => setFilter("completed")}>Completed</button>
         <button onClick={() => setFilter("pending")}>Pending</button>
       </div>
 
-    
       <div className="sort-buttons">
         <button onClick={() => setSortType("default")}>Default</button>
         <button onClick={() => setSortType("az")}>A-Z</button>
@@ -111,7 +122,6 @@ function Tasks(){
         <button onClick={() => setSortType("completed")}>Completed First</button>
       </div>
 
-   
       <ul className="task-list">
         {sortedTasks.map((task, index) => (
           <li className="task-item" key={index}>

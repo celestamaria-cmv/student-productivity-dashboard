@@ -1,6 +1,6 @@
-.dashboard-container{
-  padding: 20px;
-  text-align: center;
+.dashboard-container {
+  width: 100%;
+  padding: 30px;
 }
 
 .dashboard-title{

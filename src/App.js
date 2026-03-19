@@ -15,24 +15,23 @@ function App() {
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
+  <BrowserRouter>
 
-      <BrowserRouter>
+    <Sidebar />
 
-        <Sidebar />
+    <div className="main-content">
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-      
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-
-        <Routes>
-          <Route path='/' element={<Dashboard />} />
-          <Route path='/tasks' element={<Tasks />} />
-          <Route path='/notes' element={<Notes />} />
-          <Route path='/study' element={<StudyTracker />} />
-        </Routes>
-
-      </BrowserRouter>
-
+      <Routes>
+        <Route path='/' element={<Dashboard />} />
+        <Route path='/tasks' element={<Tasks />} />
+        <Route path='/notes' element={<Notes />} />
+        <Route path='/study' element={<StudyTracker />} />
+      </Routes>
     </div>
+
+  </BrowserRouter>
+</div>
   );
 }
 

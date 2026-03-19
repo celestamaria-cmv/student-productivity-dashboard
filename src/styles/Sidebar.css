@@ -1,5 +1,52 @@
-@media (max-width: 768px){
-  .sidebar{
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background-color: #f4f5f7;
+  color: #333;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-right: 1px solid #e0e0e0;
+}
+
+.logo {
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 12px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #555;
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.sidebar a:hover {
+  background-color: #e8eaf0;
+}
+
+.sidebar a.active {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
     display: none;
   }
 }
