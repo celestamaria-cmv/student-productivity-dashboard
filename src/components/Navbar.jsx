@@ -5,7 +5,6 @@ function Navbar({ darkMode, setDarkMode }) {
 
       <h2>Student Dashboard</h2>
 
-      {/* Dark Mode Button */}
       <button onClick={() => setDarkMode(!darkMode)}>
         {darkMode ? "☀️" : "🌙"}
       </button>
