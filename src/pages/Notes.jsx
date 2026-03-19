@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import "../styles/Notes.css";
 import useLocalStorage from "../hooks/useLocalStorage";
 

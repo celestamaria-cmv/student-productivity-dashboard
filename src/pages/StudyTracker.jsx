@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import "../styles/StudyTracker.css"
+import React from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 function StudyTracker(){
