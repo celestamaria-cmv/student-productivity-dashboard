@@ -31,76 +31,71 @@ function Dashboard() {
   ];
 
   const studyChartData = [
-  { name: "Study Hours", value: hours }
-];
-
+    { name: "Study Hours", value: hours }
+  ];
 
   return (
-  <div className="dashboard-container">
+    <div className="dashboard-container">
 
-    <h2 className="dashboard-title">Dashboard</h2>
+      <h2 className="dashboard-title">Dashboard</h2>
 
-    <div className="dashboard-cards">
+      <div className="dashboard-cards">
 
-      <div className="card">
-        <h3>Total Tasks</h3>
-        <p>{totalTasks}</p>
+        <div className="card">
+          <h3>Total Tasks</h3>
+          <p>{totalTasks}</p>
+        </div>
+
+        <div className="card">
+          <h3>Completed Tasks</h3>
+          <p>{completedTasks}</p>
+        </div>
+
+        <div className="card">
+          <h3>Pending Tasks</h3>
+          <p>{pendingTasks}</p>
+        </div>
+
+        <div className="card">
+          <h3>Study Hours Today</h3>
+          <p>{hours}</p>
+        </div>
+
+        <div className="card">
+          <h3>Total Notes</h3>
+          <p>{totalNotes}</p>
+        </div>
+
       </div>
 
-      <div className="card">
-        <h3>Completed Tasks</h3>
-        <p>{completedTasks}</p>
+      <div className="chart-container">
+        <h3>Task Overview</h3>
+
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={taskChartData}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="value" fill="#4CAF50" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
 
-      <div className="card">
-        <h3>Pending Tasks</h3>
-        <p>{pendingTasks}</p>
-      </div>
+      <div className="chart-container">
+        <h3>Study Hours</h3>
 
-      <div className="card">
-        <h3>Study Hours Today</h3>
-        <p>{hours}</p>
-      </div>
-
-      <div className="card">
-        <h3>Total Notes</h3>
-        <p>{totalNotes}</p>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={studyChartData}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="value" fill="#2196F3" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
 
     </div>
-
-    
-    <div className="chart-container">
-
-      <h3>Task Overview</h3>
-
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={taskChartData}>
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="value" fill="#4CAF50" />
-        </BarChart>
-      </ResponsiveContainer>
- </div>
-
-     <div className="chart-container">
-
-  <h3>Study Hours</h3>
-
-  <ResponsiveContainer width="100%" height={300}>
-    <BarChart data={studyChartData}>
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Bar dataKey="value" fill="#2196F3" />
-    </BarChart>
-  </ResponsiveContainer>
-
-</div>
-
-  </div>
-);
+  );
 }
 
 export default Dashboard;

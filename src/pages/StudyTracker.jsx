@@ -1,5 +1,6 @@
 import React from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import '../styles/StudyTracker.css'
 
 function StudyTracker(){
      const [hours, setHours] = useLocalStorage("studyHours", 0);
