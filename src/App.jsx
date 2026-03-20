@@ -1,12 +1,12 @@
 import '../styles/App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Dashboard from './Dashboard';
-import Tasks from './Tasks';
-import Notes from './Notes';
-import StudyTracker from './StudyTracker';
-import Sidebar from '../components/Sidebar';
-import Navbar from '../components/Navbar';
-import useLocalStorage from "../hooks/useLocalStorage";
+import Dashboard from './pages/Dashboard';
+import Tasks from './pages/Tasks';
+import Notes from './pages/Notes';
+import StudyTracker from './pages/StudyTracker';
+import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar';
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
 
