@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "../styles/Notes.css";
+import axios from "axios";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 
 function Notes(){
   const [notes, setNotes] = useLocalStorage("notes", []);
   const[input,setInput]=useState("");
+  const [backendNotes, setBackendNotes] = useState([]);
 
 function addNote(){
   const trimmedNote=input.trim();
@@ -16,7 +18,13 @@ function addNote(){
   }
 
 }
-
+useEffect(() => {
+  axios
+    .get("http://localhost:5001/api/notes")
+    .then((res) => {
+      setBackendNotes(res.data);
+    });
+}, []);
 function deleteNote(index){
   setNotes(notes.filter((_, i) => i !== index));
 }
@@ -65,7 +73,14 @@ return(
         </li>
       ))}
     </ul>
+      <h3>Notes from Backend</h3>
 
+{backendNotes.map((note) => (
+  <div key={note.id}>
+    <h4>{note.title}</h4>
+    <p>{note.content}</p>
+  </div>
+))}
   </div>
 );
 }

@@ -1,10 +1,12 @@
 import React from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import axios from "axios";
 import '../styles/StudyTracker.css'
+import { useEffect,useState } from "react";
 
 function StudyTracker(){
      const [hours, setHours] = useLocalStorage("studyHours", 0);
-
+    const [studyData, setStudyData] = useState([]);
     function addHours(){
         setHours(hours +1);
     }
@@ -14,7 +16,13 @@ function StudyTracker(){
         setHours(hours-1);
     }
 } 
-
+useEffect(() => {
+  axios
+    .get("http://localhost:5001/api/study")
+    .then((res) => {
+      setStudyData(res.data);
+    });
+}, []);
     function resetHours(){
         setHours(0);
     }
@@ -34,6 +42,13 @@ return(
         -1 Hour</button>
     <button className="reset-hour" onClick={resetHours}>
         Reset</button>
+        <h3>Study Data from Backend</h3>
+
+{studyData.map((item) => (
+  <p key={item.id}>
+    {item.subject} - {item.hours} hours
+  </p>
+))}
    </div>
  </div>
 )

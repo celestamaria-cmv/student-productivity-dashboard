@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import "../styles/Tasks.css";
+import axios from "axios";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 function Tasks(){
 
   const [tasks, setTasks] = useLocalStorage("Tasks", []);
   const [input, setInput] = useState("");
+  const [backendTasks, setBackendTasks] = useState([]);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [sortType, setSortType] = useState("default");
@@ -18,6 +20,16 @@ function Tasks(){
       return () => clearTimeout(timer);
     }
   }, [message]);
+  useEffect(() => {
+  axios
+    .get("http://localhost:5001/api/tasks")
+    .then((res) => {
+      setBackendTasks(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
 
   function addTasks(){
     const trimmedTask = input.trim();
@@ -81,6 +93,15 @@ function Tasks(){
     <div className="tasks-container">
 
       <h2 className="tasks-title">Tasks</h2>
+      <h3>Tasks from Backend API</h3>
+
+<ul>
+  {backendTasks.map((task) => (
+    <li key={task.id}>
+      {task.text}
+    </li>
+  ))}
+</ul>
 
       {message && <p className={`toast ${toastType}`}>{message}</p>}
 
@@ -152,7 +173,7 @@ function Tasks(){
               >
                 Delete
               </button>
-
+              
             </div>
 
           </li>
