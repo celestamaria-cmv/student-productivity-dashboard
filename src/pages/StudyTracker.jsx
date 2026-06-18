@@ -1,57 +1,101 @@
-import React from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import '../styles/StudyTracker.css'
-import { useEffect,useState } from "react";
+import "../styles/StudyTracker.css";
 
-function StudyTracker(){
-     const [hours, setHours] = useLocalStorage("studyHours", 0);
-    const [studyData, setStudyData] = useState([]);
-    function addHours(){
-        setHours(hours +1);
-    }
+function StudyTracker() {
+  const [studyData, setStudyData] = useState([]);
+  const [subject, setSubject] = useState("");
+  const [hours, setHours] = useState("");
 
-    function removeHours(){
-        if(hours>0){
-        setHours(hours-1);
-    }
-} 
-useEffect(() => {
-  axios
-    .get("http://localhost:5001/api/study")
-    .then((res) => {
-      setStudyData(res.data);
-    });
-}, []);
-    function resetHours(){
-        setHours(0);
-    }
+  useEffect(() => {
+    fetchStudyData();
+  }, []);
 
-return(
+  function fetchStudyData() {
+    axios
+      .get("http://localhost:5001/api/study")
+      .then((res) => {
+        setStudyData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function addStudySession() {
+    if (!subject || !hours) return;
+
+    axios
+      .post("http://localhost:5001/api/study", {
+        subject,
+        hours,
+      })
+      .then(() => {
+        fetchStudyData();
+        setSubject("");
+        setHours("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function deleteStudySession(id) {
+    axios
+      .delete(`http://localhost:5001/api/study/${id}`)
+      .then(() => {
+        fetchStudyData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  return (
     <div className="study-container">
-    <h2 className="study-title">Study Tracker</h2>
-    
-    <div className="study-hours-box">
-      <h3>Total Hours Studied Today:{hours}</h3>
+      <h2 className="study-title">Study Tracker</h2>
+
+      <div className="study-inputs">
+        <input
+          type="text"
+          placeholder="Subject"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Hours"
+          value={hours}
+          onChange={(e) => setHours(e.target.value)}
+        />
+
+        <button
+          className="add-hour"
+          onClick={addStudySession}
+        >
+          Add Session
+        </button>
+      </div>
+
+      <h3>Study Sessions</h3>
+
+      {studyData.map((item) => (
+        <div key={item.id} className="study-item">
+          <p>
+            {item.subject} - {item.hours} hours
+          </p>
+
+          <button
+            className="reset-hour"
+            onClick={() => deleteStudySession(item.id)}
+          >
+            Delete
+          </button>
+        </div>
+      ))}
     </div>
-
-    <div className="study-buttons">
-    <button className="add-hour" onClick={addHours}>
-        +1 Hour</button>
-    <button className="remove-hour" onClick={removeHours}>
-        -1 Hour</button>
-    <button className="reset-hour" onClick={resetHours}>
-        Reset</button>
-        <h3>Study Data from Backend</h3>
-
-{studyData.map((item) => (
-  <p key={item.id}>
-    {item.subject} - {item.hours} hours
-  </p>
-))}
-   </div>
- </div>
-)
+  );
 }
 
 export default StudyTracker;
